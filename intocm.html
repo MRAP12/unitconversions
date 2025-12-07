@@ -5,106 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inches ↔ Centimeters Converter</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-
-        .converter-box {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 300px;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f4; }
+        .main-container { display: flex; background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .formula-sidebar { background-color: #e9ecef; padding: 20px; width: 180px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #ddd; }
+        .formula-sidebar h2 { font-size: 1rem; color: #333; margin-bottom: 10px; text-align: left; }
+        .formula-sidebar code { display: block; background-color: #fff; padding: 8px; margin-bottom: 10px; border-radius: 4px; font-size: 0.8rem; text-align: left; overflow-wrap: break-word; }
+        .converter-box { padding: 30px; text-align: center; width: 300px; }
+        h1 { color: #333; font-size: 1.5rem; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
     </style>
 </head>
 <body>
-
-    <div class="converter-box">
-        <h1>Inches ↔ CM Converter</h1>
-        <p>Enter a value in either field to convert.</p>
-        
-        <div class="input-group">
-            <label for="inches">Inches (in)</label>
-            <input type="number" id="inches" placeholder="0" oninput="convertFromInches()">
+    <div class="main-container">
+        <div class="formula-sidebar">
+            <h2>Formulas:</h2>
+            <p><code>in → cm: in × 2.54</code></p>
+            <p><code>cm → in: cm / 2.54</code></p>
         </div>
-
-        <div class="input-group">
-            <label for="centimeters">Centimeters (cm)</label>
-            <input type="number" id="centimeters" placeholder="0" oninput="convertFromCm()">
+        <div class="converter-box">
+            <h1>Inches ↔ CM Converter</h1>
+            <p>Enter a value in either field.</p>
+            <div class="input-group">
+                <label for="inches">Inches (in)</label>
+                <input type="number" id="inches" placeholder="0" oninput="convertFromInches()">
+            </div>
+            <div class="input-group">
+                <label for="centimeters">Centimeters (cm)</label>
+                <input type="number" id="centimeters" placeholder="0" oninput="convertFromCm()">
+            </div>
         </div>
     </div>
-
     <script>
-        /* 1 inch = 2.54 centimeters */
         const CM_PER_INCH = 2.54;
-
         function convertFromInches() {
-            // Get the value from the inches input field
             const inchesInput = document.getElementById("inches").value;
-            // Get the centimeters input field reference
             const cmInput = document.getElementById("centimeters");
-
-            if (inchesInput) {
-                // Calculate the value and set the centimeters field
-                const centimeters = inchesInput * CM_PER_INCH;
-                cmInput.value = centimeters.toFixed(2); // Round to 2 decimal places
-            } else {
-                // Clear the other field if the current field is empty
-                cmInput.value = "";
-            }
+            if (inchesInput) { const centimeters = inchesInput * CM_PER_INCH; cmInput.value = centimeters.toFixed(2); } else { cmInput.value = ""; }
         }
-
         function convertFromCm() {
-            // Get the value from the centimeters input field
             const cmInput = document.getElementById("centimeters").value;
-            // Get the inches input field reference
             const inchesInput = document.getElementById("inches");
-
-            if (cmInput) {
-                // Calculate the value and set the inches field
-                const inches = cmInput / CM_PER_INCH;
-                inchesInput.value = inches.toFixed(2); // Round to 2 decimal places
-            } else {
-                // Clear the other field if the current field is empty
-                inchesInput.value = "";
-            }
+            if (cmInput) { const inches = cmInput / CM_PER_INCH; inchesInput.value = inches.toFixed(2); } else { inchesInput.value = ""; }
         }
     </script>
-
 </body>
 </html>
