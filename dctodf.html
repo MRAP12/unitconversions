@@ -14,12 +14,47 @@
             margin: 0;
             background-color: #f4f4f4;
         }
-
-        .converter-box {
+        /* Main Layout Container */
+        .main-container {
+            display: flex;
             background: white;
-            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden; /* Keeps sharp corners within the shadow */
+        }
+
+        /* Formula Sidebar (Left Tab) */
+        .formula-sidebar {
+            background-color: #e9ecef; /* Light gray background */
+            padding: 20px;
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid #ddd;
+        }
+
+        .formula-sidebar h2 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .formula-sidebar code {
+            display: block;
+            background-color: #fff;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-align: left;
+            overflow-wrap: break-word; /* Ensures long formulas wrap */
+        }
+
+        /* Converter Box (Right Side) */
+        .converter-box {
+            padding: 30px;
             text-align: center;
             width: 300px;
         }
@@ -54,34 +89,35 @@
 </head>
 <body>
 
-    <div class="converter-box">
-        <h1>°C ↔ °F Converter</h1>
-        <p>Enter a value in either field to convert.</p>
-        
-        <div class="input-group">
-            <label for="celsius">Celsius (°C)</label>
-            <input type="number" id="celsius" placeholder="0" oninput="convertFromCelsius()">
+    <div class="main-container">
+        <div class="formula-sidebar">
+            <h2>Formulas:</h2>
+            <p><code>°C → °F: (C × 9/5) + 32</code></p>
+            <p><code>°F → °C: (F - 32) × 5/9</code></p>
         </div>
 
-        <div class="input-group">
-            <label for="fahrenheit">Fahrenheit (°F)</label>
-            <input type="number" id="fahrenheit" placeholder="32" oninput="convertFromFahrenheit()">
+        <div class="converter-box">
+            <h1>°C ↔ °F Converter</h1>
+            <p>Enter a value in either field.</p>
+            
+            <div class="input-group">
+                <label for="celsius">Celsius (°C)</label>
+                <input type="number" id="celsius" placeholder="0" oninput="convertFromCelsius()">
+            </div>
+
+            <div class="input-group">
+                <label for="fahrenheit">Fahrenheit (°F)</label>
+                <input type="number" id="fahrenheit" placeholder="32" oninput="convertFromFahrenheit()">
+            </div>
         </div>
     </div>
 
     <script>
-        /* 
-          Formulas: 
-          C to F: (C * 9/5) + 32
-          F to C: (F - 32) * 5/9
-        */
-
         function convertFromCelsius() {
             const celsiusInput = document.getElementById("celsius").value;
             const fahrenheitInput = document.getElementById("fahrenheit");
 
             if (celsiusInput || celsiusInput === '0') {
-                // Ensure the input is treated as a number
                 const fahrenheit = (parseFloat(celsiusInput) * 9/5) + 32;
                 fahrenheitInput.value = fahrenheit.toFixed(2);
             } else {
@@ -94,7 +130,6 @@
             const celsiusInput = document.getElementById("celsius");
 
             if (fahrenheitInput || fahrenheitInput === '32') {
-                // Ensure the input is treated as a number
                 const celsius = (parseFloat(fahrenheitInput) - 32) * 5/9;
                 celsiusInput.value = celsius.toFixed(2);
             } else {
