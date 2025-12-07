@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litres ↔ UK Gallons Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .converter-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="converter-box">
+        <h1>Litres ↔ UK Gallons</h1>
+        <p>Enter a value in either field to convert.</p>
+        
+        <div class="input-group">
+            <label for="litres">Litres (L)</label>
+            <input type="number" id="litres" placeholder="0" oninput="convertFromLitres()">
+        </div>
+
+        <div class="input-group">
+            <label for="gallons">Imperial Gallons (UK/IRL)</label>
+            <input type="number" id="gallons" placeholder="0" oninput="convertFromGallons()">
+        </div>
+    </div>
+
+    <script>
+        /* 1 Imperial Gallon = 4.54609 Litres */
+        const L_PER_IMP_GAL = 4.54609;
+
+        function convertFromLitres() {
+            const litresInput = document.getElementById("litres").value;
+            const gallonsInput = document.getElementById("gallons");
+
+            if (litresInput) {
+                const gallons = litresInput / L_PER_IMP_GAL;
+                gallonsInput.value = gallons.toFixed(3); // Round to 3 decimal places
+            } else {
+                gallonsInput.value = "";
+            }
+        }
+
+        function convertFromGallons() {
+            const gallonsInput = document.getElementById("gallons").value;
+            const litresInput = document.getElementById("litres");
+
+            if (gallonsInput) {
+                const litres = gallonsInput * L_PER_IMP_GAL;
+                litresInput.value = litres.toFixed(3); // Round to 3 decimal places
+            } else {
+                litresInput.value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
