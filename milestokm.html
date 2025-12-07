@@ -5,98 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miles ↔ Kilometers Converter</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-
-        .converter-box {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 300px;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f4; }
+        .main-container { display: flex; background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .formula-sidebar { background-color: #e9ecef; padding: 20px; width: 180px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #ddd; }
+        .formula-sidebar h2 { font-size: 1rem; color: #333; margin-bottom: 10px; text-align: left; }
+        .formula-sidebar code { display: block; background-color: #fff; padding: 8px; margin-bottom: 10px; border-radius: 4px; font-size: 0.8rem; text-align: left; overflow-wrap: break-word; }
+        .converter-box { padding: 30px; text-align: center; width: 300px; }
+        h1 { color: #333; font-size: 1.5rem; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
     </style>
 </head>
 <body>
-
-    <div class="converter-box">
-        <h1>Miles ↔ KM Converter</h1>
-        <p>Enter a value in either field to convert.</p>
-        
-        <div class="input-group">
-            <label for="miles">Miles (mi)</label>
-            <input type="number" id="miles" placeholder="0" oninput="convertFromMiles()">
+    <div class="main-container">
+        <div class="formula-sidebar">
+            <h2>Formulas:</h2>
+            <p><code>mi → km: mi × 1.60934</code></p>
+            <p><code>km → mi: km / 1.60934</code></p>
         </div>
-
-        <div class="input-group">
-            <label for="kilometers">Kilometers (km)</label>
-            <input type="number" id="kilometers" placeholder="0" oninput="convertFromKm()">
+        <div class="converter-box">
+            <h1>Miles ↔ KM Converter</h1>
+            <p>Enter a value in either field.</p>
+            <div class="input-group">
+                <label for="miles">Miles (mi)</label>
+                <input type="number" id="miles" placeholder="0" oninput="convertFromMiles()">
+            </div>
+            <div class="input-group">
+                <label for="kilometers">Kilometers (km)</label>
+                <input type="number" id="kilometers" placeholder="0" oninput="convertFromKm()">
+            </div>
         </div>
     </div>
-
     <script>
-        /* 1 mile = 1.60934 kilometers */
         const KM_PER_MILE = 1.60934;
-
         function convertFromMiles() {
             const milesInput = document.getElementById("miles").value;
             const kmInput = document.getElementById("kilometers");
-
-            if (milesInput) {
-                const kilometers = milesInput * KM_PER_MILE;
-                kmInput.value = kilometers.toFixed(3); // Round to 3 decimal places
-            } else {
-                kmInput.value = "";
-            }
+            if (milesInput) { const kilometers = milesInput * KM_PER_MILE; kmInput.value = kilometers.toFixed(3); } else { kmInput.value = ""; }
         }
-
         function convertFromKm() {
             const kmInput = document.getElementById("kilometers").value;
             const milesInput = document.getElementById("miles");
-
-            if (kmInput) {
-                const miles = kmInput / KM_PER_MILE;
-                milesInput.value = miles.toFixed(3); // Round to 3 decimal places
-            } else {
-                milesInput.value = "";
-            }
+            if (kmInput) { const miles = kmInput / KM_PER_MILE; milesInput.value = miles.toFixed(3); } else { milesInput.value = ""; }
         }
     </script>
-
 </body>
 </html>
