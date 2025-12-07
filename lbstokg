@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pounds ↔ Kilograms Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .converter-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="converter-box">
+        <h1>Lbs ↔ Kg Converter</h1>
+        <p>Enter a value in either field to convert.</p>
+        
+        <div class="input-group">
+            <label for="pounds">Pounds (lbs)</label>
+            <input type="number" id="pounds" placeholder="0" oninput="convertFromPounds()">
+        </div>
+
+        <div class="input-group">
+            <label for="kilograms">Kilograms (kg)</label>
+            <input type="number" id="kilograms" placeholder="0" oninput="convertFromKg()">
+        </div>
+    </div>
+
+    <script>
+        /* 1 pound = 0.453592 kilograms */
+        const KG_PER_POUND = 0.453592;
+
+        function convertFromPounds() {
+            const poundsInput = document.getElementById("pounds").value;
+            const kgInput = document.getElementById("kilograms");
+
+            if (poundsInput) {
+                const kilograms = poundsInput * KG_PER_POUND;
+                kgInput.value = kilograms.toFixed(3); // Round to 3 decimal places
+            } else {
+                kgInput.value = "";
+            }
+        }
+
+        function convertFromKg() {
+            const kgInput = document.getElementById("kilograms").value;
+            const poundsInput = document.getElementById("pounds");
+
+            if (kgInput) {
+                const pounds = kgInput / KG_PER_POUND;
+                poundsInput.value = pounds.toFixed(3); // Round to 3 decimal places
+            } else {
+                poundsInput.value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
