@@ -5,98 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yards ↔ Meters Converter</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-
-        .converter-box {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 300px;
-        }
-
-        h1 {
-            color: #333;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f4; }
+        .main-container { display: flex; background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .formula-sidebar { background-color: #e9ecef; padding: 20px; width: 180px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #ddd; }
+        .formula-sidebar h2 { font-size: 1rem; color: #333; margin-bottom: 10px; text-align: left; }
+        .formula-sidebar code { display: block; background-color: #fff; padding: 8px; margin-bottom: 10px; border-radius: 4px; font-size: 0.8rem; text-align: left; overflow-wrap: break-word; }
+        .converter-box { padding: 30px; text-align: center; width: 300px; }
+        h1 { color: #333; font-size: 1.5rem; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
     </style>
 </head>
 <body>
-
-    <div class="converter-box">
-        <h1>Yards ↔ Meters Converter</h1>
-        <p>Enter a value in either field to convert.</p>
-        
-        <div class="input-group">
-            <label for="yards">Yards (yd)</label>
-            <input type="number" id="yards" placeholder="0" oninput="convertFromYards()">
+    <div class="main-container">
+        <div class="formula-sidebar">
+            <h2>Formulas:</h2>
+            <p><code>yd → m: yd × 0.9144</code></p>
+            <p><code>m → yd: m / 0.9144</code></p>
         </div>
-
-        <div class="input-group">
-            <label for="meters">Meters (m)</label>
-            <input type="number" id="meters" placeholder="0" oninput="convertFromMeters()">
+        <div class="converter-box">
+            <h1>Yards ↔ Meters Converter</h1>
+            <p>Enter a value in either field.</p>
+            <div class="input-group">
+                <label for="yards">Yards (yd)</label>
+                <input type="number" id="yards" placeholder="0" oninput="convertFromYards()">
+            </div>
+            <div class="input-group">
+                <label for="meters">Meters (m)</label>
+                <input type="number" id="meters" placeholder="0" oninput="convertFromMeters()">
+            </div>
         </div>
     </div>
-
     <script>
-        /* 1 yard = 0.9144 meters */
         const METERS_PER_YARD = 0.9144;
-
         function convertFromYards() {
             const yardsInput = document.getElementById("yards").value;
             const metersInput = document.getElementById("meters");
-
-            if (yardsInput) {
-                const meters = yardsInput * METERS_PER_YARD;
-                metersInput.value = meters.toFixed(3); // Round to 3 decimal places
-            } else {
-                metersInput.value = "";
-            }
+            if (yardsInput) { const meters = yardsInput * METERS_PER_YARD; metersInput.value = meters.toFixed(3); } else { metersInput.value = ""; }
         }
-
         function convertFromMeters() {
             const metersInput = document.getElementById("meters").value;
             const yardsInput = document.getElementById("yards");
-
-            if (metersInput) {
-                const yards = metersInput / METERS_PER_YARD;
-                yardsInput.value = yards.toFixed(3); // Round to 3 decimal places
-            } else {
-                yardsInput.value = "";
-            }
+            if (metersInput) { const yards = metersInput / METERS_PER_YARD; yardsInput.value = yards.toFixed(3); } else { yardsInput.value = ""; }
         }
     </script>
-
 </body>
 </html>
