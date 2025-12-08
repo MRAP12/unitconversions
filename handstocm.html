@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hands ↔ Centimeters Converter</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f4; }
+        .main-container { display: flex; background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .formula-sidebar { background-color: #e9ecef; padding: 20px; width: 180px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #ddd; }
+        .formula-sidebar h2 { font-size: 1rem; color: #333; margin-bottom: 10px; text-align: left; }
+        .formula-sidebar code { display: block; background-color: #fff; padding: 8px; margin-bottom: 10px; border-radius: 4px; font-size: 0.8rem; text-align: left; overflow-wrap: break-word; }
+        .converter-box { padding: 30px; text-align: center; width: 300px; }
+        h1 { color: #333; font-size: 1.5rem; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="formula-sidebar">
+            <h2>Formulas:</h2>
+            <p><code>hands → cm: hands × 10.16</code></p>
+            <p><code>cm → hands: cm / 10.16</code></p>
+            <p><code>1 hand = 4 inches</code></p>
+        </div>
+
+        <div class="converter-box">
+            <h1>Hands ↔ CM Converter</h1>
+            <p>Enter a value in either field to convert.</p>
+            
+            <div class="input-group">
+                <label for="hands">Hands</label>
+                <input type="number" id="hands" placeholder="0" oninput="convertFromHands()">
+            </div>
+
+            <div class="input-group">
+                <label for="centimeters">Centimeters (cm)</label>
+                <input type="number" id="centimeters" placeholder="0" oninput="convertFromCm()">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* 1 hand = 4 inches = 10.16 centimeters */
+        const CM_PER_HAND = 10.16;
+
+        function convertFromHands() {
+            const handsInput = document.getElementById("hands").value;
+            const cmInput = document.getElementById("centimeters");
+
+            if (handsInput) {
+                const centimeters = handsInput * CM_PER_HAND;
+                cmInput.value = centimeters.toFixed(2); // Round to 2 decimal places
+            } else {
+                cmInput.value = "";
+            }
+        }
+
+        function convertFromCm() {
+            const cmInput = document.getElementById("centimeters").value;
+            const handsInput = document.getElementById("hands");
+
+            if (cmInput) {
+                const hands = cmInput / CM_PER_HAND;
+                handsInput.value = hands.toFixed(2); // Round to 2 decimal places
+            } else {
+                handsInput.value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
