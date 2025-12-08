@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluid Ounces ↔ Milliliters Converter</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f4; }
+        .main-container { display: flex; background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .formula-sidebar { background-color: #e9ecef; padding: 20px; width: 180px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #ddd; }
+        .formula-sidebar h2 { font-size: 1rem; color: #333; margin-bottom: 10px; text-align: left; }
+        .formula-sidebar code { display: block; background-color: #fff; padding: 8px; margin-bottom: 10px; border-radius: 4px; font-size: 0.8rem; text-align: left; overflow-wrap: break-word; }
+        .converter-box { padding: 30px; text-align: center; width: 300px; }
+        h1 { color: #333; font-size: 1.5rem; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input, select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        select { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="formula-sidebar">
+            <h2>Formulas:</h2>
+            <p><code>1 Imp fl oz ≈ 28.413 ml</code></p>
+            <p><code>1 US fl oz ≈ 29.574 ml</code></p>
+        </div>
+
+        <div class="converter-box">
+            <h1>fl oz ↔ ml Converter</h1>
+            <p>Enter a value in either field.</p>
+            
+            <div class="input-group">
+                <label for="floz">Fluid Ounces (fl oz)</label>
+                <input type="number" id="floz" placeholder="0" oninput="convertFromFloz()">
+            </div>
+
+            <div class="input-group">
+                <label for="ml">Milliliters (ml)</label>
+                <input type="number" id="ml" placeholder="0" oninput="convertFromMl()">
+                <select id="volumeType" onchange="convertFromFloz()">
+                    <option value="imperial">Imperial (UK/IRL)</option>
+                    <option value="us">U.S. Standard</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ML_PER_IMP_FLOZ = 28.413;
+        const ML_PER_US_FLOZ = 29.574;
+
+        function getConversionFactor() {
+            const type = document.getElementById("volumeType").value;
+            return type === "imperial" ? ML_PER_IMP_FLOZ : ML_PER_US_FLOZ;
+        }
+
+        function convertFromFloz() {
+            const flozInput = document.getElementById("floz").value;
+            const mlInput = document.getElementById("ml");
+            const factor = getConversionFactor();
+
+            if (flozInput) {
+                const ml = flozInput * factor;
+                mlInput.value = ml.toFixed(3); 
+            } else {
+                mlInput.value = "";
+            }
+        }
+
+        function convertFromMl() {
+            const mlInput = document.getElementById("ml").value;
+            const flozInput = document.getElementById("floz");
+            const factor = getConversionFactor();
+
+            if (mlInput) {
+                const floz = mlInput / factor;
+                flozInput.value = floz.toFixed(3); 
+            } else {
+                flozInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
